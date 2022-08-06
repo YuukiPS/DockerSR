@@ -25,6 +25,6 @@ COPY --chown=dockersr:dockersr entrypoint.sh ./dockersr
 # User
 USER dockersr
 
-RUN ls . -a && cd dockersr && npm install && echo "tes5"
+RUN ls . -a && cd dockersr && npm install && echo "tes6"
 
 ENTRYPOINT ["sh", "./dockersr/entrypoint.sh"]

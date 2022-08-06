@@ -1,0 +1,30 @@
+FROM node:current-alpine
+RUN  \
+     # Install json utilities for config.json
+     apk add --no-cache git curl python3 make g++ &&\
+     npm update -g && npm install --unsafe-perm -g json
+
+# Sweet Home Alabama :)
+WORKDIR /home
+
+# EXPOSE Web (https) and Game Server
+EXPOSE 443 22102 80
+
+# Add User
+RUN addgroup --system dockersr && adduser -S -s /bin/false -G dockersr dockersr
+
+# Copy files SR Game
+COPY --chown=dockersr:dockersr YuukiSR ./dockersr
+# Copy file work
+COPY --chown=dockersr:dockersr work ./dockersr
+# Copy file SR Res
+COPY --chown=dockersr:dockersr SR_Resources/Resources ./dockersr/src/data
+# Set Entrypoint
+COPY --chown=dockersr:dockersr entrypoint.sh ./dockersr
+
+# User
+USER dockersr
+
+RUN ls . -a && cd dockersr && npm install && echo "tes5"
+
+ENTRYPOINT ["sh", "./dockersr/entrypoint.sh"]

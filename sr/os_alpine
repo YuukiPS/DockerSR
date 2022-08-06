@@ -8,7 +8,7 @@ RUN  \
 WORKDIR /home
 
 # EXPOSE Web (https) and Game Server
-EXPOSE 443 22102 80
+EXPOSE 443 22103 80
 
 # Add User
 RUN addgroup --system dockersr && adduser -S -s /bin/false -G dockersr dockersr

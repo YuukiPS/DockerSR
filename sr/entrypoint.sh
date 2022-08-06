@@ -105,12 +105,12 @@ do
   esac
 done
 
-folder_gc="/home/dockersr"
-folder_resources="$folder_gc/data"
+folder_sr="/home/dockersr"
+folder_resources="$folder_sr/data"
 update=false
 timems=date
 
-cd $folder_gc
+cd $folder_sr
 
 OSVS=$(. /etc/os-release && printf '%s\n' "$NAME")
 SUB="Alpine"
@@ -195,8 +195,9 @@ if [ ! -f "config.json" ]; then
  fi
 
  # URL SSL
- if [ -z "$web_url_ssl" ]; then
-  web_url_ssl="false"
+ ishttp="https"
+ if [ "$web_url_ssl" = "no" ]; then
+  ishttp="http"
  fi
 
  # if no config just boot
@@ -204,15 +205,16 @@ if [ ! -f "config.json" ]; then
 
  # ip/domain public for web (Outside docker)
  if [ -z "$set_web_ip" ]; then
-  set_web_ip=0.0.0.0  
+  set_web_ip=0.0.0.0
  fi
 
  # Ip web port
  if [ -z "$set_web_port" ]; then
   set_web_port="443"
  fi
-
+ urldp="$ishttp://$set_web_ip:$set_web_port/query_gateway"
  echo "Server Web Public: $set_web_ip:$set_web_port"
+ echo "Server URL Public: $urldp"
  echo "URL SSL Web Public: $web_url_ssl"
 
  # ip public for game (Outside docker)
@@ -222,7 +224,7 @@ if [ ! -f "config.json" ]; then
 
  # Ip game port
  if [ -z "$set_game_port" ]; then
-  set_game_port="22102"
+  set_game_port="22103"
  fi
 
  echo "Server Ip Game: $set_game_ip:$set_game_port"
@@ -244,12 +246,15 @@ if [ ! -f "config.json" ]; then
  else      
   echo "Server MongoDB: $set_datebase"
   json -q -I -f config.json -e "this.MONGO_URI='$set_datebase'"
-  json -q -I -f config.json -e "this.MONGO_URI='$set_datebase'"
  fi
 
- # Config IP Game
- #json -q -I -f config.json -e "this.GAMESERVER.SERVER_IP='$set_game_ip'"
- #json -q -I -f config.json -e "this.GAMESERVER.SERVER_PORT='$set_game_port'" 
+ # Config Game Server
+ json -q -I -f config.json -e "this.GAMESERVER.SERVER_IP='$set_game_ip'"
+ json -q -I -f config.json -e "this.GAMESERVER.SERVER_PORT='$set_game_port'"
+ json -q -I -f config.json -e "this.GAMESERVER.SERVER_NAME='$set_name_server'"
+ # Config Dispatch
+ json -q -I -f config.json -e "this.DISPATCH[0].DISPATCH_NAME='$set_name_server'"
+ json -q -I -f config.json -e "this.DISPATCH[0].DISPATCH_URL='$urldp'"
 
  # Config Game Web
  #json -q -I -f config.json -e "this.HTTP.HTTP_HOST='$set_web_ip'"

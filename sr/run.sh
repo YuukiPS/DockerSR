@@ -159,11 +159,11 @@ if [ "$metode" = "start" ];then
   docker run \
   --rm -it \
   -v $res:/home/YuukiSR/data \
-  -p 22102:22102/udp \
+  -p 22103:22103/udp \
   -p 443:443/tcp \
   -p 80:80/tcp \
   siakbary/$product:$version_last_commit \
-  --datebase "mongodb://$ipdb" \
+  --datebase "mongodb://$ipdb/dockersr" \
   --web_ip "$ip" \
   --game_ip "$ip" \
   --ssl "false" \

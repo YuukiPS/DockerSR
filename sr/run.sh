@@ -8,7 +8,7 @@ usebranch=$3
 filejson="work/config.json" 
 filejson_res="todo/config.backup"
 
-switchbc="Patch-1.0"
+switchbc="1.0"
 switcres="1.0"
 
 version_gchash="unknown";
@@ -49,7 +49,7 @@ fi
 
 # Branch Switch Version
 if [ "$usebranch" = "0" ];then
- switchbc="Patch-1.0"
+ switchbc="1.0"
  switcres="1.0"
 fi
 
@@ -193,14 +193,7 @@ if [ "$metode" = "sync" ];then
   whosm="Crepe-Inc"
  fi
  if [ -z "$getme" ]; then
-  if [ "$switchbc" = "Patch-2.8" ];then
-   getme="development"
-  elif [ "$switchbc" = "Patch-2.8-Early" ];then
-   getme="development"
-   # git rebase --ignore-whitespace
-  else
-   getme="2.6"
-  fi
+  getme="main"
  fi
  git pull https://github.com/$whosm/$dlrepo.git $getme
  cd ..

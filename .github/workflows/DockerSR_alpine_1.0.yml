@@ -15,11 +15,7 @@ jobs:
       with:
        repository: akbaryahya/YuukiSR
        ref: 1.0
-       path: sr/YuukiSR
-    - name: Setup Node
-    - uses: actions/setup-node@v3
-      with:
-       node-version: 16
+       path: sr/YuukiSR    
     - name: Setup Docker Login
       env:
         DOCKER_USER: ${{secrets.DOCKER_USER}}

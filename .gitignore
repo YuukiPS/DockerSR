@@ -1,9 +1,11 @@
-work
-todo
+sr/work_gc
+sr/todo_gc
+
 .vscode
 .gitmodules
 .idea
-VERSION_TMP
+ver_tmp
+
 sr/YuukiSR
 sr/SRServer-GC
 sr/SR_Resources

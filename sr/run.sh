@@ -233,50 +233,6 @@ if [ "$metode" = "clean_work" ];then
  rm -R -f $folderwork/*
 fi
 
-# if sync
-if [ "$metode" = "sync" ];then
- cd $useProject
- whosm=$4
- getme=$5
- dlrepo=$6
- if [ -z "$dlrepo" ]; then
-  dlrepo="Grasscutter"
- fi
- if [ -z "$whosm" ]; then
-  whosm="Grasscutters"
- fi
- if [ -z "$getme" ]; then
-  if [ "$useBranchesProject" = "3.6" ];then
-   getme="unstable-quests"
-  else
-   getme="development"
-  fi
- fi
- # --allow-unrelated-histories only do it if it's really needed, because I hate conflicts so better use "git cherry-pick <first_commit>..<last_commit>"
- git pull https://github.com/$whosm/$dlrepo.git $getme
- cd ..
-fi
-
-# if put
-if [ "$metode" = "put" ];then
- cd $useProject
- git cherry-pick $4
-fi
-
-# if put
-if [ "$metode" = "--continue" ];then
- cd $useProject
- git cherry-pick --continue
-fi
-
-if [ "$metode" = "sync_raw" ];then
- cd $useProject
- whosm=$4
- getme=$5
- git pull $whosm $getme
- cd ..
-fi
-
 if [ "$metode" = "check" ];then
  cd $useProject
  npx prettier --config .prettierrc.json --check .

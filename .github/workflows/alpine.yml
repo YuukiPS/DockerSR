@@ -2,10 +2,10 @@ name: DockerSR Alpine
 on:
   push:
     paths:
-      - "gs/os-loc-alpine-lc"
-      - "gs/ver_LunarCore-Original-1.5.0"
-      - "gs/run.sh"
-      - "gs/entrypoint_lc.sh"
+      - "sr/os-loc-alpine-lc"
+      - "sr/ver_LunarCore-Original-1.5.0"
+      - "sr/run.sh"
+      - "sr/entrypoint_lc.sh"
       - ".github/workflows/alpine.yml"
 jobs:
   build:

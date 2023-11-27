@@ -81,20 +81,9 @@ if [ "$os" = "repo" ]; then
     git clone --depth=1 https://gitlab.com/YuukiPS/SR-Resources SR_Resources
   fi
 
-  if [ "$metode" = "data" ]; then
-    echo "~ Get Data Resources"
-    git clone --depth=1 https://gitlab.com/YuukiPS/SR-Data $useData
-  fi
-
   echo "Clone repo done..."
   exit 1
 fi
-
-# Get Data (TODO: support multi data source)
-# if [ ! -d "$useData" ]; then
-#  echo "No Found Data, let's clone first"
-#  sh run.sh repo data
-# fi
 
 # for YuukiPS (cmd5)
 if [ "$5" = "pv" ]; then
@@ -388,11 +377,10 @@ if [ "$metode" = "build" ]; then
     echo "Copy jar file..."
     cp -rTf $useProject/LunarCore.jar $folderwork/LunarCore.jar
 
-    echo "Copy res file..." # TODO: remove this or get better.
-    # cp -rf $useProject/src/main/resources/defaults/data/* $folderworkdata/
-    cp -rf $useData/data/* $folderworkdata/
+    echo "Copy data file..."
+    cp -rf $useProject/data/* $folderworkdata/
 
-    echo "Remove jar Grasscutter"
+    echo "Remove jar LunarCore"
     rm $useProject/LunarCore.jar
 
     echo "Copy file version local"

@@ -1,0 +1,23 @@
+FROM eclipse-temurin:17-jdk-alpine
+RUN  \
+     # Install json utilities for config.json, TODO: remove git after zip function in lc finished and nodejs, procps used for ps monitors
+     apk add --no-cache nodejs git curl procps &&\
+     cd /usr/bin/ && curl -L https://github.com/trentm/json/raw/master/lib/json.js > json && chmod 755 json
+
+# Web (https 443) (http 80) (Game 23301)
+EXPOSE 443 80 23301
+
+# Add User
+RUN addgroup --system dockersr && adduser -S -s /bin/false -G dockersr dockersr
+
+# Sweet Home Alabama :)
+WORKDIR /home/dockersr
+
+# Copy files LunarCore
+COPY --chown=dockersr:dockersr entrypoint_lc.sh work_lc ./
+RUN mkdir -p ./resources && chown -R dockersr:dockersr ./resources
+
+# User
+USER dockersr
+
+ENTRYPOINT ["sh", "./entrypoint_lc.sh"]

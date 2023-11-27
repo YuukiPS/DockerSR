@@ -1,9 +1,5 @@
 name: DockerSR (Public)
 on:
-  push: # auto
-    paths:
-      - "sr/ver_LunarCore-Original-1.5.0"
-      - ".github/workflows/public.yml"
   workflow_dispatch: # manual
     inputs:
       repo:

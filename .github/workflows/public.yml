@@ -9,7 +9,7 @@ on:
       repo:
         description: "Repo"
         required: true
-        default: "LunarCore-Original"
+        default: "YuukiPS/LunarCore-Original"
       branches:
         description: "Branches Repo"
         required: true

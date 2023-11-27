@@ -16,7 +16,7 @@ jobs:
       - name: Sync LunarCore
         uses: actions/checkout@v3
         with:
-          repository: LunarCore-Original
+          repository: YuukiPS/LunarCore-Original
           ref: "1.5.0"
           path: sr/LunarCore-Original
       - name: Setup Java

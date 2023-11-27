@@ -6,28 +6,28 @@ metode=$2
 versioncontrol=$3
 isprivate=$5
 
-# Project (We use Grasscutter as main project)
+# Project (We use LunarCore as main project)
 mainProject="dockersr"
-useProject="SRServer-GC"
-useFolderProject="gc"
-useOSProject="gc"
-useShortProject="yuukips"
+useProject="LunarCore-Original"
+useFolderProject="lc"
+useOSProject="lc"
+useShortProject="dockersr"
 useData="SR_Data"
 useStart="local"
 useMetode="build"
-useBranchesProject="1.0.5"
-useBranchesRes="1.0.5"
+useBranchesProject="1.5.0"
+useBranchesRes="1.5.0-LC"
 useResFolder="SR_Resources"
 
 userHub="siakbary"
 
 # Version Control
 if [ "$versioncontrol" = "0" ];then
- useBranchesProject="1.0.5"
- useBranchesRes="1.0.5"
+ useBranchesProject="1.5.0"
+ useBranchesRes="1.5.0-LC"
 fi
 
-build_gc="$useProject/.gradle $useProject/bin $useProject/build $useProject/src/generated"
+build_game="$useProject/.gradle $useProject/bin $useProject/build $useProject/src/generated"
 
 # Version
 version_pjhash="unknown";
@@ -56,17 +56,17 @@ if [ "$os" = "repo" ];then
  echo "Start clone repo..."
  
  if [ "$metode" = "java" ];then
-  echo "~ Get SRServer-GC"
-  git clone --depth=1 https://github.com/YuukiPS/SRServer-GC SRServer-GC
+  echo "~ Get LunarCore-Original..."
+  git clone --depth=1 https://github.com/YuukiPS/LunarCore-Original LunarCore-Original
  fi
 
  if [ "$metode" = "res_java" ];then
-  echo "~ Get Data Resources Java for Grasscutter (SR) (Java)"
+  echo "~ Get Data Resources..."
   git clone --depth=1 https://gitlab.com/YuukiPS/SR-Resources SR_Resources
  fi
 
  if [ "$metode" = "data" ];then
-  echo "~ Get Data Folder"
+  echo "~ Get Data Folder..."
   git clone --depth=1 https://gitlab.com/YuukiPS/SR-Data $useData
  fi
 
@@ -190,9 +190,9 @@ if [ "$metode" = "start" ];then
   
   if [ "$4" = "debug" ];then 
    # -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005 -cp bin 
-   java -Dfile.encoding=UTF-8 -jar grasscutter.jar -debug
+   java -Dfile.encoding=UTF-8 -jar LunarCore.jar -debug
   else
-   java -Dfile.encoding=UTF-8 -jar grasscutter.jar
+   java -Dfile.encoding=UTF-8 -jar LunarCore.jar
   fi
 
  else
@@ -222,7 +222,8 @@ if [ "$metode" = "start" ];then
   --game_ip "$ip" \
   --ssl "false" \
   --web_url_ssl "false" \
-  --token "local"
+  --token "local" \
+  --download_resource "auto"
 
  fi
 
@@ -270,8 +271,8 @@ if [ "$metode" = "build" ];then
     cp -rTf $filejson $filejson_res
    fi
 
-   echo "Remove File Build GC for SR (beginning)"
-   rm -rf $build_gc
+   echo "Remove File Build LC for SR (beginning)"
+   rm -rf $build_game
    echo "Remove file $folderwork folder (ending)"   
    rm -rf $folderwork/*
 
@@ -301,14 +302,14 @@ if [ "$metode" = "build" ];then
   fi
 
   echo "Copy jar file..."  
-  cp -rTf $useProject/grasscutter*.jar $folderwork/grasscutter.jar
+  cp -rTf $useProject/LunarCore.jar $folderwork/LunarCore.jar
 
-  # echo "Copy res file..." # TODO: remove this or get better gc
+  # echo "Copy res file..." # TODO: remove this or get better LC
   # cp -rf $useProject/src/main/resources/defaults/data/* $folderworkdata/
   # cp -rf $useData/data/* $folderworkdata/
 
   echo "Remove jar Grasscutter"  
-  rm $useProject/grasscutter*.jar
+  rm $useProject/LunarCore.jar
 
   echo "Copy file version local"
   cp -rTf ver_tmp $folderwork/ver

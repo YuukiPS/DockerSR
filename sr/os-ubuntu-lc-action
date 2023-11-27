@@ -1,0 +1,53 @@
+FROM eclipse-temurin:17-jdk as build
+
+WORKDIR /work
+
+# Add User
+RUN adduser --system --group dockersr
+
+# Copy source code to work/dockersr
+COPY --chown=dockersr:dockersr tmp ./dockersr
+
+# Make jar
+RUN ls -a &&\
+    cd dockersr &&\
+    chmod +x gradlew &&\
+    ./gradlew jar &&\
+    ls -a
+
+FROM eclipse-temurin:17-jdk
+RUN  \
+    apt update && apt-get upgrade -y && apt-get -y install git curl nodejs &&\
+    # Install json (TODO: remove this) utilities for config.json
+    cd /usr/bin/ && curl -L https://github.com/trentm/json/raw/master/lib/json.js > json && chmod 755 json &&\
+    apt-get clean && apt-get autoclean && apt-get autoremove --yes
+
+# Sweet Home Alabama :)
+WORKDIR /home
+
+# EXPOSE Web (https) and Game Server
+EXPOSE 443 23301 80
+
+# Add User
+RUN adduser --system --group dockersr
+
+# Copy jar file
+COPY --chown=dockersr:dockersr --from=build /work/dockersr/LunarCore.jar ./dockersr
+
+# Copy Version
+COPY --chown=dockersr:dockersr work_lc ./dockersr
+
+# Copy Entrypoint
+COPY --chown=dockersr:dockersr entrypoint_lc.sh ./dockersr
+
+# Testing
+# RUN ls dockersr
+
+# Make Folder
+RUN mkdir -p ./dockersr/resources &&\
+    chown -R dockersr:dockersr ./dockersr/resources
+
+# User
+USER dockersr
+
+ENTRYPOINT ["sh", "./dockersr/entrypoint_lc.sh"]

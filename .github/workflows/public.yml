@@ -1,0 +1,59 @@
+name: DockerSR (Public)
+on:
+  push: # auto
+    paths:
+      - "sr/ver_LunarCore-Original-1.5.0"
+      - ".github/workflows/public.yml"
+  workflow_dispatch: # manual
+    inputs:
+      repo:
+        description: "Repo"
+        required: true
+        default: "LunarCore-Original"
+      branches:
+        description: "Branches Repo"
+        required: true
+        default: "1.5.0"
+      resources:
+        description: "Branches Resources"
+        required: true
+        default: "1.5.0-LC"
+      platforms:
+        description: "Platforms"
+        required: true
+        default: "linux/amd64,linux/arm64"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sync DockerSR
+        uses: actions/checkout@v3
+      - name: Sync Repo
+        uses: actions/checkout@v3
+        with:
+          repository: ${{ github.event.inputs.repo || 'YuukiPS/LunarCore-Original' }}
+          ref: ${{ github.event.inputs.branches || '1.5.0' }}
+          path: sr/tmp
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{secrets.DOCKER_USER}}
+          password: ${{secrets.DOCKER_PASSWORD}}
+      - name: Get Version only #1=os for ubuntu,2 metode for version_action, 3 for version branches, 4 for version resources (normal not need)
+        run: cd sr && chmod +x run.sh && sh run.sh ubuntu version_action ${{ github.event.inputs.branches || '1.5.0' }} ${{ github.event.inputs.resources || '1.5.0-LC' }}
+      - name: Build and Push
+        uses: docker/build-push-action@v3
+        with:
+          context: ./sr
+          file: ./sr/os-ubuntu-lc-action # use image tmp
+          platforms: ${{ github.event.inputs.platforms || 'linux/amd64,linux/arm64' }}
+          push: true
+          tags: |
+            ${{ env.ver1 }}
+            ${{ env.ver2 }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max

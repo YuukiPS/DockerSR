@@ -1,0 +1,24 @@
+FROM eclipse-temurin:17-jdk
+RUN  \
+     apt-get update && apt-get -y install git curl nodejs &&\
+     # Install json utilities for config.json
+     cd /usr/bin/ && curl -L https://github.com/trentm/json/raw/master/lib/json.js > json && chmod 755 json &&\
+     apt-get clean && apt-get autoclean && apt-get autoremove --yes
+
+# Web (https 443) (http 80) (Game 23301)
+EXPOSE 443 80 23301
+
+# Add User
+RUN adduser --system --group dockersr
+
+# Sweet Home Alabama :)
+WORKDIR /home/dockersr
+
+# Copy files Grasscutter
+COPY --chown=dockersr:dockersr entrypoint_lc.sh work_lc ./
+RUN mkdir -p ./resources && chown -R dockersr:dockersr ./resources
+
+# User
+USER dockersr
+
+ENTRYPOINT ["sh", "./entrypoint_lc.sh"]

@@ -1,2 +1,4 @@
 # DockerSR
-DockerSR is a container that run CrepeSR (another anime game) with just a single command.
+DockerSR is a container that run LunarCore with just a single command.<br>
+./run.sh local build 0 <br>
+./run.sh local build 0 <br>

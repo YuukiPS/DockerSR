@@ -1,12 +1,13 @@
 sr/work_gc
 sr/todo_gc
+sr/work_lc
+sr/todo_lc
 
 .vscode
 .gitmodules
 .idea
 ver_tmp
 
-sr/YuukiSR
-sr/SRServer-GC
+sr/LunarCore-Original
 sr/SR_Resources
 sr/SR_Proto

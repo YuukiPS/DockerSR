@@ -1,24 +1,25 @@
-name: DockerSR Alpine
+name: YuukiSR
 on:
   push:
     paths:
       - "sr/os-loc-alpine-lc"
-      - "sr/ver_LunarCore-Original-1.5.0"
+      - "sr/ver_LunarCore-Private-1.5.0"
       - "sr/run.sh"
       - "sr/entrypoint_lc.sh"
-      - ".github/workflows/alpine.yml"
+      - ".github/workflows/yuukips.yml"
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Sync DockerSR
         uses: actions/checkout@v3
-      - name: Sync LunarCore
+      - name: Sync LunarCore Private
         uses: actions/checkout@v3
         with:
-          repository: YuukiPS/LunarCore-Original
+          repository: YuukiPS/LunarCore-Private
           ref: "1.5.0"
-          path: sr/LunarCore-Original
+          token: ${{ secrets.HUB_TOKEN }}
+          path: sr/LunarCore-Private
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
@@ -30,10 +31,11 @@ jobs:
       - name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
-          username: ${{secrets.DOCKER_USER}}
-          password: ${{secrets.DOCKER_PASSWORD}}
+          registry: repo.yuuki.me
+          username: ${{secrets.DOCKER_USER_PRIVATE}}
+          password: ${{secrets.DOCKER_PASSWORD_PRIVATE}}
       - name: Build Local Jar
-        run: cd sr && chmod +x run.sh && sh run.sh alpine build 0 docker_action
+        run: cd sr && chmod +x run.sh && sh run.sh alpine build 0 docker_action pv
       - name: Build Image Docker and Push
         uses: docker/build-push-action@v3
         with:

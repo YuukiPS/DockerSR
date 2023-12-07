@@ -5,30 +5,25 @@ os=$1
 metode=$2
 versioncontrol=$3
 
-# Project (We use LunarCore Original as main project)
-mainProject="dockersr"
+# Project (main as private)
+userHub="siakbary" # Docker Username
+mainProject="dockersr" # Docker Registry
 useFolderProject="lc"
 useOSProject="lc"
 useData="SR_Data"
 useStart="local"
 useMetode="build"
 useResFolder="SR_Resources"
-# for version
-useProject="LunarCore-Original" # folder project
-useShortProject="dockersr"
+useProject="LunarCore-Private"
+useShortProject="dockersr" # name in commet
 useBranchesProject="1.5.0"
 useBranchesRes="1.5.0-LC"
 
-userHub="siakbary"
-
-# Version Control by User
+# Version Control by User, skip if version_action
 if [ "$2" != "version_action" ]; then
 
-  if [ "$versioncontrol" = "0" ]; then 
-    useBranchesProject="1.5.0"
-    useBranchesRes="1.5.0-LC"
-    useShortProject="dockersr"
-    useProject="LunarCore-Original"
+  if [ "$versioncontrol" = "0" ]; then
+    echo "main project"
   fi
 
 fi

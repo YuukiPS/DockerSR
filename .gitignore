@@ -1,13 +1,21 @@
+# Work
 sr/work_gc
 sr/todo_gc
 sr/work_lc
 sr/todo_lc
 
+# Git
 .vscode
 .gitmodules
 .idea
+
+# Version
 ver_tmp
 
-sr/LunarCore-Original
+# Repo
+sr/LunarCore-Public
+sr/LunarCore-Private
+
+# Data
 sr/SR_Resources
 sr/SR_Proto

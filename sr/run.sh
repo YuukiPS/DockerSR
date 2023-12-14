@@ -6,8 +6,8 @@ metode=$2
 versioncontrol=$3
 
 # Project (main as private)
-userHub="siakbary" # Docker Username
-mainProject="dockersr" # Docker Registry
+userHub="registry.gitlab.com/yuukips" # Docker Username or Url Registry
+mainProject="yuukilc" # Docker Image
 useFolderProject="lc"
 useOSProject="lc"
 useData="SR_Data"
@@ -78,12 +78,6 @@ if [ "$os" = "repo" ]; then
 
   echo "Clone repo done..."
   exit 1
-fi
-
-# for YuukiPS (cmd5)
-if [ "$5" = "pv" ]; then
-  echo "Private Mode0"
-  userHub="repo.yuuki.me"
 fi
 
 echo "OS: $os - Metode: $metode - Branch: $useBranchesProject - Project: $useProject ($useShortProject) > $userHub"
@@ -408,11 +402,6 @@ if [ "$metode" = "build" ]; then
         .
     elif [ "$4" = "docker_action" ]; then
 
-      if [ "$5" = "pv" ]; then
-        echo "Private Mode2"
-        userHub="repo.yuuki.me"
-      fi
-
       echo "ver1=$userHub/$mainProject:$version_last_commit" >>$GITHUB_ENV
       echo "ver2=$userHub/$mainProject:$version_last_sw" >>$GITHUB_ENV
       sh run.sh local build $versioncontrol $4 $5
@@ -437,8 +426,8 @@ if [ "$metode" = "build" ]; then
       echo "Copy file version docker"
       echo -n "$version_last_commit" >$folderwork/ver
 
-      docker build -t "repo.yuuki.me/$mainProject:$version_last_commit" -f os-loc-$os-$useOSProject .
-      docker push repo.yuuki.me/$mainProject:$version_last_commit
+      docker build -t "$userHub/$mainProject:$version_last_commit" -f os-loc-$os-$useOSProject .
+      docker push $userHub/$mainProject:$version_last_commit
 
     elif [ "$4" = "docker_debug" ]; then
 
@@ -472,12 +461,7 @@ fi
 
 # Push Public
 if [ "$metode" = "push" ]; then
+  echo "Push to $userHub"
   docker push $userHub/$mainProject:$version_last_commit
   docker push $userHub/$mainProject:$version_last_sw
-fi
-
-# Push Private
-if [ "$metode" = "private_push" ]; then
-  echo "push private"
-  docker push repo.yuuki.me/$mainProject:$version_last_commit
 fi

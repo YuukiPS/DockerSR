@@ -16,13 +16,17 @@ useMetode="build"
 useResFolder="SR_Resources"
 useProject="LunarCore-Private"
 useShortProject="dockersr" # name in commet
-useBranchesProject="1.5.0"
-useBranchesRes="1.5.0-LC"
+useBranchesProject="1.6.0"
+useBranchesRes="1.6.0-LC"
 
 # Version Control by User, skip if version_action
 if [ "$2" != "version_action" ]; then
 
   if [ "$versioncontrol" = "0" ]; then
+    echo "switch 1.5.0"
+    useBranchesProject="1.5.0"
+    useBranchesRes="1.5.0-LC"
+  elif [ "$versioncontrol" = "1" ]; then # 1.6.0 (private)
     echo "main project"
   fi
 
@@ -246,7 +250,7 @@ if [ "$metode" = "sync" ]; then
     whosm="Melledy"
   fi
   if [ -z "$getme" ]; then
-    if [ "$useBranchesProject" = "1.5.0" ]; then
+    if [ "$useBranchesProject" = "1.6.0" ]; then
       getme="development"
     else
       getme="development"

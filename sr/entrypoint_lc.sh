@@ -131,7 +131,7 @@ cd $folder_sr
 OSVS=$(. /etc/os-release && printf '%s\n' "$NAME")
 SUB="Alpine"
 version=$(cat ver)
-version_res="2.0.0-LC"
+version_res="2.1.0-LC"
 resmd5="e7754c155a4668606fc3695aced65717" # TODO: auto update md5 if res update
 
 # Switch RS
@@ -140,6 +140,8 @@ if echo "$version" | grep -F -w "1.5.0"; then
 elif echo "$version" | grep -F -w "1.6.0"; then
   version_res="1.6.0-LC"
 elif echo "$version" | grep -F -w "2.0.0"; then
+  version_res="2.0.0-LC"
+elif echo "$version" | grep -F -w "2.1.0"; then
   echo "use last"
 fi
 

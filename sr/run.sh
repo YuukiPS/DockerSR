@@ -38,6 +38,9 @@ if [ "$2" != "version_action" ]; then
     useBranchesRes="2.1.0-LC"
   elif [ "$versioncontrol" = "4" ]; then # 2.2.0 (private)
     echo "main project"
+  elif [ "$versioncontrol" = "5" ]; then # 2.2.51 (private beta)
+    useBranchesProject="2.2.51"
+    useBranchesRes="2.1.0-LC"
   fi
 
 fi

@@ -23,11 +23,9 @@ useBranchesRes="2.2.0-LC"
 if [ "$2" != "version_action" ]; then
 
   if [ "$versioncontrol" = "0" ]; then
-    echo "switch 1.5.0"
     useBranchesProject="1.5.0"
     useBranchesRes="1.5.0-LC"
   elif [ "$versioncontrol" = "1" ]; then # 1.6.0 (private)
-    echo "switch 1.6.0"
     useBranchesProject="1.6.0"
     useBranchesRes="1.6.0-LC"
   elif [ "$versioncontrol" = "2" ]; then # 2.0.0 (private)

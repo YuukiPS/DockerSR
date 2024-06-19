@@ -266,9 +266,9 @@ if [ "$metode" = "sync" ]; then
   fi
   if [ -z "$getme" ]; then
     if [ "$useBranchesProject" = "2.3.0" ]; then
-      getme="main"
+      getme="development"
     else
-      getme="main"
+      getme="development"
     fi
   fi
   echo "pull $useProject"

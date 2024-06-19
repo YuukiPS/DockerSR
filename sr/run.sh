@@ -265,10 +265,10 @@ if [ "$metode" = "sync" ]; then
     whosm="Melledy"
   fi
   if [ -z "$getme" ]; then
-    if [ "$useBranchesProject" = "2.2.0" ]; then
-      getme="development"
+    if [ "$useBranchesProject" = "2.3.0" ]; then
+      getme="main"
     else
-      getme="development"
+      getme="main"
     fi
   fi
   echo "pull $useProject"

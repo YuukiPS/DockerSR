@@ -394,8 +394,8 @@ if [ "$metode" = "build" ]; then
     echo "Copy file version local"
     cp -rTf ver_tmp $folderwork/ver
 
-    echo "Copy file SSL Key"
-    cp -rf $useProject/keystore.p12 $folderwork/
+    # echo "Copy file SSL Key"
+    # cp -rf $useProject/keystore.p12 $folderwork/
 
   else
 

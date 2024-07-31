@@ -16,8 +16,8 @@ useMetode="build"
 useResFolder="SR_Resources"
 useProject="LunarCore-Private"
 useShortProject="dockersr" # name in commet
-useBranchesProject="2.3.0"
-useBranchesRes="2.3.0-LC"
+useBranchesProject="2.4.0"
+useBranchesRes="2.4.0-LC"
 
 # Version Control by User, skip if version_action
 if [ "$2" != "version_action" ]; then
@@ -37,10 +37,13 @@ if [ "$2" != "version_action" ]; then
   elif [ "$versioncontrol" = "4" ]; then # 2.2.0 (private)
     useBranchesProject="2.2.0"
     useBranchesRes="2.2.0-LC"
-  elif [ "$versioncontrol" = "5" ]; then # 2.2.51 (private)    
+  elif [ "$versioncontrol" = "5" ]; then # 2.2.51 (private beta)    
     useBranchesProject="2.2.51"
     useBranchesRes="2.2.0-LC"
-  elif [ "$versioncontrol" = "6" ]; then # 2.3.0 (private beta)
+  elif [ "$versioncontrol" = "6" ]; then # 2.3.0 (private)
+    useBranchesProject="2.3.0"
+    useBranchesRes="2.3.0-LC"
+  elif [ "$versioncontrol" = "7" ]; then # 2.4.0 (private)
     echo "main project"
   fi
 

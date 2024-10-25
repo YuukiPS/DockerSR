@@ -63,7 +63,7 @@ if [ "$2" = "version_action" ]; then
   useBranchesRes=$4
 fi
 
-build_game="$useProject/.gradle $useProject/bin $useProject/build"
+build_game="$useProject/.gradle $useProject/bin $useProject/build $useProject/src/generated"
 # $useProject/src/generated
 # $useProject/logs $useProject/resources $useProject/config.json $useProject/plugins
 

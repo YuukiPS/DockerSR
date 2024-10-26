@@ -8,6 +8,7 @@ sr/todo_lc
 .vscode
 .gitmodules
 .idea
+.history
 
 # Version
 ver_tmp

@@ -72,6 +72,8 @@ fi
 build_game="$useProject/.gradle $useProject/bin $useProject/build $useProject/src/generated"
 # $useProject/src/generated
 # $useProject/logs $useProject/resources $useProject/config.json $useProject/plugins
+echo "tes"
+ls $useProject/src/generated/main/emu/lunarcore/proto
 
 # Version
 version_pjhash="unknown"

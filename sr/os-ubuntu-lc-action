@@ -1,4 +1,4 @@
-FROM eclipse-temurin:17-jdk as build
+FROM eclipse-temurin:22-jdk as build
 
 WORKDIR /work
 
@@ -15,7 +15,7 @@ RUN ls -a &&\
     ./gradlew jar &&\
     ls -a
 
-FROM eclipse-temurin:17-jdk
+FROM eclipse-temurin:22-jdk
 RUN  \
     apt update && apt-get upgrade -y && apt-get -y install git curl nodejs &&\
     # Install json (TODO: remove this) utilities for config.json

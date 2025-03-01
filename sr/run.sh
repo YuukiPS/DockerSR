@@ -111,7 +111,7 @@ if [ "$os" = "repo" ]; then
   fi
 
   if [ "$metode" = "res" ]; then
-    echo "~ Get Data Resources"
+    echo "~ Get Resources"
     git clone --depth=1 https://gitlab.com/YuukiPS/SR-Resources SR_Resources
   fi
 
@@ -407,6 +407,7 @@ if [ "$metode" = "build" ]; then
 
     echo "Copy data file..."
     cp -rf $useProject/data/* $folderworkdata/
+    ls -la --time-style=full-iso $folderworkdata/
 
     echo "Remove jar LunarCore"
     rm $useProject/LunarCore.jar

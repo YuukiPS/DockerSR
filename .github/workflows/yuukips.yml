@@ -18,7 +18,7 @@ jobs:
         with:
           repository: YuukiPS/LunarCore-Private
           ref: "3.1.0"
-          token: ${{ secrets.HUB_TOKEN }} # tes1
+          token: ${{ secrets.HUB_TOKEN }} # tes2
           path: sr/LunarCore-Private
       - name: Setup Java
         uses: actions/setup-java@v3

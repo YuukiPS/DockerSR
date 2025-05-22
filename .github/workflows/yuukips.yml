@@ -3,7 +3,7 @@ on:
   push:
     paths:
       - "sr/os-loc-alpine-lc"
-      - "sr/ver_LunarCore-Private-3.2.0"
+      - "sr/ver_LunarCore-Private-3.3.0"
       - "sr/run.sh"
       - "sr/entrypoint_lc.sh"
       - ".github/workflows/yuukips.yml"
@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: YuukiPS/LunarCore-Private
-          ref: "3.2.0"
+          ref: "3.3.0"
           token: ${{ secrets.HUB_TOKEN }} # tes2
           path: sr/LunarCore-Private
       - name: Setup Java
@@ -35,7 +35,7 @@ jobs:
           username: ${{secrets.DOCKER_USER_PRIVATE_GITLAB}}
           password: ${{secrets.DOCKER_PASSWORD_PRIVATE_GITLAB}}
       - name: Build Local Jar
-        run: cd sr && chmod +x run.sh && sh run.sh alpine build 13 docker_action
+        run: cd sr && chmod +x run.sh && sh run.sh alpine build 14 docker_action
       - name: Build Image Docker and Push
         uses: docker/build-push-action@v3
         with:
